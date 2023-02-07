@@ -161,10 +161,15 @@ COCO_NOVEL_CATEGORIES = [
 
 # PASCAL VOC categories
 PASCAL_VOC_ALL_CATEGORIES = {
-    1: ["aeroplane", "bicycle", "boat", "bottle", "car",
+  #  1: ["aeroplane", "bicycle", "boat", "bottle", "car",
+  #      "cat", "chair", "diningtable", "dog", "horse",
+  #      "person", "pottedplant", "sheep", "train", "tvmonitor",
+  #      "bird", "bus", "cow", "motorbike", "sofa",
+  # ],
+     1: ["aeroplane", "bicycle", "boat", "bottle", "car",
         "cat", "chair", "diningtable", "dog", "horse",
         "person", "pottedplant", "sheep", "train", "tvmonitor",
-        "bird", "bus", "cow", "motorbike", "sofa",
+        "JapaneseKnotweed",
     ],
     2: ["bicycle", "bird", "boat", "bus", "car",
         "cat", "chair", "diningtable", "dog", "motorbike",
@@ -179,7 +184,8 @@ PASCAL_VOC_ALL_CATEGORIES = {
 }
 
 PASCAL_VOC_NOVEL_CATEGORIES = {
-    1: ["bird", "bus", "cow", "motorbike", "sofa"],
+  #  1: ["bird", "bus", "cow", "motorbike", "sofa"],
+    1: ["Japanese Knotweed"],
     2: ["aeroplane", "bottle", "cow", "horse", "sofa"],
     3: ["boat", "cat", "motorbike", "sheep", "sofa"],
 }
