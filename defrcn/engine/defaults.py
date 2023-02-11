@@ -20,6 +20,8 @@ from defrcn.checkpoint import DetectionCheckpointer
 from defrcn.solver import build_lr_scheduler, build_optimizer
 from defrcn.evaluation import DatasetEvaluator, inference_on_dataset, print_csv_format, verify_results
 from defrcn.dataloader import MetadataCatalog, build_detection_test_loader, build_detection_train_loader
+import detectron2.data.transforms as T
+from detectron2.data import DatasetMapper 
 
 
 __all__ = [
@@ -430,7 +432,9 @@ class DefaultTrainer(SimpleTrainer):
         It now calls :func:`defrcn.data.build_detection_train_loader`.
         Overwrite it if you'd like a different data loader.
         """
-        return build_detection_train_loader(cfg)
+        #return build_detection_train_loader(cfg)
+        print("Applying reszing-------------------->600x1024")
+        return build_detection_train_loader(cfg, mapper=DatasetMapper(cfg, is_train=True, augmentations=[T.Resize((600, 1024))]))
 
     @classmethod
     def build_test_loader(cls, cfg, dataset_name):
@@ -441,7 +445,9 @@ class DefaultTrainer(SimpleTrainer):
         It now calls :func:`defrcn.data.build_detection_test_loader`.
         Overwrite it if you'd like a different data loader.
         """
-        return build_detection_test_loader(cfg, dataset_name)
+        #return build_detection_test_loader(cfg, dataset_name)
+        print("Applying reszing-------------------->600x1024")
+        return build_detection_test_loader(cfg, dataset_name, mapper=DatasetMapper(cfg, is_train=True, augmentations=[T.Resize((600, 1024))]))
 
     @classmethod
     def build_evaluator(cls, cfg, dataset_name):
