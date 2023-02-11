@@ -60,7 +60,7 @@ def register_all_voc(root="datasets"):
         for sid in range(1, 4):
             for shot in [1, 2, 3, 5, 10]:
                 for year in [2007, 2012]:
-                    for seed in range(30):
+                    for seed in range(2):
                         seed = "_seed{}".format(seed)
                         name = "voc_{}_trainval_{}{}_{}shot{}".format(
                             year, prefix, sid, shot, seed
@@ -80,6 +80,7 @@ def register_all_voc(root="datasets"):
 
     for name, dirname, split, keepclasses, sid in METASPLITS:
         year = 2007 if "2007" in name else 2012
+        #print(MetadataCatalog.get(name))
         register_meta_voc(
             name,
             _get_builtin_metadata("voc_fewshot"),
@@ -90,6 +91,9 @@ def register_all_voc(root="datasets"):
             sid,
         )
         MetadataCatalog.get(name).evaluator_type = "pascal_voc"
+      
+            
+        
 
 
 register_all_coco()
