@@ -9,8 +9,11 @@ from xml.etree import ElementTree as ET
 from collections import OrderedDict, defaultdict
 from detectron2.utils import comm
 from detectron2.data import MetadataCatalog
+from detectron2.data import DatasetCatalog
 from detectron2.utils.logger import create_small_table
 from defrcn.evaluation.evaluator import DatasetEvaluator
+
+
 
 
 class PascalVOCDetectionEvaluator(DatasetEvaluator):
@@ -23,13 +26,16 @@ class PascalVOCDetectionEvaluator(DatasetEvaluator):
     the official API.
     """
 
-    def __init__(self, dataset_name):
+    def __init__(self, dataset_name): 
         """
         Args:
             dataset_name (str): name of the dataset, e.g., "voc_2007_test"
         """
         self._dataset_name = dataset_name
         meta = MetadataCatalog.get(dataset_name)
+        #data = DatasetCatalog.get(dataset_name) 
+        #print("-------------->")
+        #print(data)
         self._anno_file_template = os.path.join(meta.dirname, "Annotations", "{}.xml")
         self._image_set_path = os.path.join(meta.dirname, "ImageSets", "Main", meta.split + ".txt")
         self._class_names = meta.thing_classes

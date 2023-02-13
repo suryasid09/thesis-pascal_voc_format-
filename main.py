@@ -33,6 +33,7 @@ class Trainer(DefaultTrainer):
         return DatasetEvaluators(evaluator_list)
 
 
+
 def setup(args):
     cfg = get_cfg()
     cfg.merge_from_file(args.config_file)

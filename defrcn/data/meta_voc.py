@@ -6,8 +6,22 @@ from fvcore.common.file_io import PathManager
 from detectron2.data import DatasetCatalog, MetadataCatalog
 
 
+# from detectron2.utils.visualizer import Visualizer
+# from detectron2.structures import BoxMode
+# import cv2
+# import random
+# from matplotlib import pyplot as plot
+
+
+
+#import cv2_imshow
+
+
+
 __all__ = ["register_meta_voc"]
 
+
+mydict = []
 
 def load_filtered_voc_instances(
     name: str, dirname: str, split: str, classnames: str
@@ -18,6 +32,15 @@ def load_filtered_voc_instances(
         dirname: Contain "Annotations", "ImageSets", "JPEGImages"
         split (str): one of "train", "test", "val", "trainval"
     """
+    
+#     print("----------------------------")
+#     print(name)
+#     print(dirname)
+#     print(split)
+#     print(classnames)
+#     print("------------------------------")
+    
+    
     is_shots = "shot" in name
     if is_shots:
         fileids = {}
@@ -126,6 +149,8 @@ def load_filtered_voc_instances(
                 )
             r["annotations"] = instances
             dicts.append(r)
+            
+    #print(dicts) 
     return dicts
 
 
@@ -145,6 +170,7 @@ def register_meta_voc(
             name, dirname, split, thing_classes
         ),
     )
+    
 
     MetadataCatalog.get(name).set(
         thing_classes=thing_classes,
@@ -154,3 +180,17 @@ def register_meta_voc(
         base_classes=metadata["base_classes"][sid],
         novel_classes=metadata["novel_classes"][sid],
     )
+
+     
+       
+
+            
+    
+    
+    
+
+
+    
+    
+
+    
