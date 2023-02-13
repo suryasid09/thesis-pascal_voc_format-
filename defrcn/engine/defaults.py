@@ -433,8 +433,8 @@ class DefaultTrainer(SimpleTrainer):
         Overwrite it if you'd like a different data loader.
         """
         #return build_detection_train_loader(cfg)
-        print("Applying reszing-------------------->600x1024")
-        return build_detection_train_loader(cfg, mapper=DatasetMapper(cfg, is_train=True, augmentations=[T.Resize((600, 1024))]))
+        print("Applying reszing-------------------->224x224")
+        return build_detection_train_loader(cfg, mapper=DatasetMapper(cfg, is_train=True, augmentations=[T.Resize((224, 224))]))
 
     @classmethod
     def build_test_loader(cls, cfg, dataset_name):
@@ -446,8 +446,8 @@ class DefaultTrainer(SimpleTrainer):
         Overwrite it if you'd like a different data loader.
         """
         #return build_detection_test_loader(cfg, dataset_name)
-        print("Applying reszing-------------------->600x1024")
-        return build_detection_test_loader(cfg, dataset_name, mapper=DatasetMapper(cfg, is_train=True, augmentations=[T.Resize((600, 1024))]))
+        print("Applying reszing-------------------->224x224")
+        return build_detection_test_loader(cfg, dataset_name, mapper=DatasetMapper(cfg, is_train=True, augmentations=[T.Resize((224, 224))]))
 
     @classmethod
     def build_evaluator(cls, cfg, dataset_name):
