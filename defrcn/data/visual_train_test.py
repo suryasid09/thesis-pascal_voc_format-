@@ -1,7 +1,6 @@
 from detectron2.utils.visualizer import Visualizer
 from detectron2.utils.visualizer import ColorMode
 import meta_voc
-import cv2
 import random
 import matplotlib.pyplot as plot 
 from detectron2.engine import DefaultPredictor
@@ -17,6 +16,8 @@ from detectron2.data import detection_utils as utils
 from detectron2.data.build import filter_images_with_few_keypoints
 from detectron2.utils.logger import setup_logger
 from detectron2.utils.visualizer import Visualizer
+import numpy as np
+
 
 def setup(args):
     cfg = get_cfg()
@@ -62,15 +63,23 @@ if __name__ == "__main__":
         mydict = meta_voc.load_filtered_voc_instances("voc_2007_trainval_novel1_1shot_seed0","datasets/VOC2007","trainval",['Japanese Knotweed'])
         print("mydict---------->",mydict)
         for d in mydict:
-            print("starting------------->")
             img = cv2.imread(d["file_name"])
+            # print(img)
+            # r = np.array(img)
+            # flattened_image = r.reshape(-1, r.shape[-1])
+            # np.savetxt('/home/jovyan/thesis_s2577712/DeFRCN_voc_format/thesis-pascal_voc_format/datasets/VOC2007array_data.txt', flattened_image, fmt='%.2f')
             visualizer = Visualizer(img[:, :, ::-1], metadata=meta, scale=0.5)
             out = visualizer.draw_dataset_dict(d)
+            #cv2.imshow("window",out.get_image()[:, :, ::-1])
+            #cvShowImage("window",out.get_image()[:, :, ::-1])
+            #cv2.waitKey(0)
+            #cv2.destroyAllWindows()
+            #cv2.waitKey(1)
             plot.figure(figsize=(15,15))
             plot.imshow(out.get_image()[:, :, ::-1])
             plot.show()
-            plot.savefig("/home/jovyan/thesis_s2577712/DeFRCN_voc_format/thesis-pascal_voc_format/datasets/VOC2007/image.jpg")
-            print("ending------------->")
+            #plot.savefig("/home/jovyan/thesis_s2577712/DeFRCN_voc_format/thesis-pascal_voc_format/datasets/VOC2007/image.jpg")
+           
     else:    
         # vizualise predictions
         data = meta_voc.load_filtered_voc_instances("voc_2007_test_novel1","datasets/VOC2007","test",['japanese Knotweed'])
@@ -78,6 +87,7 @@ if __name__ == "__main__":
         predictor = DefaultPredictor(cfg)
         for d in random.sample(data, 1):
             img = cv2.imread(d["file_name"])    
+            print(img)
         outputs = predictor(img)
         # print(outputs["instances"].pred_classes)
         # print(outputs["instances"].pred_boxes)
